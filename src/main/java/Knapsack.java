@@ -14,29 +14,25 @@ public class Knapsack {
         int[] weight = getWeights(knapsackInput);
         int[] value = getValues(knapsackInput);
 
-        // opt[n][w] = max profit of packing items 1..n with weight limit w
-        // sol[n][w] = does opt solution to pack items 1..n with weight limit w include item n?
+      
         int[][] opt = new int[NUMBER_OF_ITEMS + 1][MAXIMUM_CAPACITY + 1];
         boolean[][] sol = new boolean[NUMBER_OF_ITEMS + 1][MAXIMUM_CAPACITY + 1];
 
         for (int n = 1; n <= NUMBER_OF_ITEMS; n++) {
             for (int w = 1; w <= MAXIMUM_CAPACITY; w++) {
 
-                // don't take item n
                 int option1 = opt[n - 1][w];
 
-                // take item n
                 int option2 = Integer.MIN_VALUE;
                 if (weight[n] <= w)
                     option2 = value[n] + opt[n - 1][w - weight[n]];
 
-                // select better of two options
                 opt[n][w] = Math.max(option1, option2);
                 sol[n][w] = (option2 > option1);
             }
         }
 
-        // determine which items to take
+        
         boolean[] take = new boolean[NUMBER_OF_ITEMS + 1];
         for (int n = NUMBER_OF_ITEMS, w = MAXIMUM_CAPACITY; n > 0; n--) {
             if (sol[n][w]) {
@@ -47,7 +43,7 @@ public class Knapsack {
             }
         }
 
-        // print results to file
+        
         KnapsackOutput knapsackOutput = processOutput(weight, value, take);
         writeFile(new File("output.txt"), knapsackOutput);
     }
