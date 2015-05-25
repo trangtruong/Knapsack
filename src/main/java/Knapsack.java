@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Knapsack {
 
-    public static final int SCALE = 10;
+    public static final int SCALE = 1000000;
 
     public static void main(String[] args) throws Exception {
         KnapsackInput knapsackInput = readFile(new File("input.txt"));
