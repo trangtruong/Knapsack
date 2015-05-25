@@ -54,13 +54,13 @@ public class Knapsack {
         List<KnapsackItem> items = new ArrayList<KnapsackItem>();
         System.out.println("item" + "\t" + "value" + "\t" + "weight" + "\t" + "take");
         for (int i = 1; i < weight.length; i++) {
+            double w = (double) weight[i] / SCALE;
+            double v = (double) value[i] / SCALE;
             if (take[i] == true) {
-                double w = (double) weight[i] / SCALE;
-                double v = (double) value[i] / SCALE;
                 items.add(new KnapsackItem(w, v));
             }
             // print results to console for debug
-            System.out.println(i + "\t" + value[i] + "\t" + weight[i] + "\t" + take[i]);
+            System.out.println(i + "\t" + v + "\t" + w + "\t" + take[i]);
         }
         knapsackOutput.setItems(items);
         return knapsackOutput;
